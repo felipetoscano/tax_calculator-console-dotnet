@@ -1,34 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TaxCalculator.Taxes
+﻿namespace TaxCalculator.Taxes
 {
     public abstract class TaxTemplate
     {
-        public TaxTemplate NextTax { get; private set; }
-        public TaxTemplate(TaxTemplate nextTax)
+        public double Calculate(Budget budget)
         {
-            NextTax = nextTax;
-        }
-
-        public TaxTemplate()
-        {
-            NextTax = null;
-        }
-
-        public abstract double Calculate(Budget budget);
-
-        public double CalculateNextTax(Budget budget)
-        {
-            if(NextTax == null)
+            if (ShouldUseMaxRate(budget))
             {
-                return 0;
+                return MaxRate(budget);
             }
-
-            return NextTax.Calculate(budget);
+            else
+            {
+                return MinRate(budget);
+            }
         }
+
+        protected abstract bool ShouldUseMaxRate(Budget budget);
+        protected abstract double MaxRate(Budget budget);
+        protected abstract double MinRate(Budget budget);
     }
 }
