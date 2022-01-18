@@ -10,13 +10,9 @@ namespace TaxCalculator
 
             var t1 = new ICCC();
             var t2 = new ICMS();
-            var t3 = new ISS();
 
-            var processor = new TaxProcessor();
-
-            processor.Calculate(budget, t1);
-            processor.Calculate(budget, t2);
-            processor.Calculate(budget, t3);
+            Console.WriteLine(t1.Calculate(budget));
+            Console.WriteLine(t2.Calculate(budget));
         }
     }
 }

@@ -1,10 +1,20 @@
 ﻿namespace TaxCalculator.Taxes
 {
-    public class ICMS : ITax
+    public class ICMS : TaxTemplate
     {
-        public double Calculate(Budget budget)
+        public ICMS() : base()
         {
-            return budget.Value * 0.05;
+
+        }
+
+        public ICMS(TaxTemplate nextTax) : base(nextTax)
+        {
+
+        }
+
+        public override double Calculate(Budget budget)
+        {
+            return budget.Value * 0.05 + CalculateNextTax(budget);
         }
     }
 }

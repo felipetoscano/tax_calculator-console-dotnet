@@ -1,10 +1,20 @@
 ﻿namespace TaxCalculator.Taxes
 {
-    public class ISS : ITax
+    public class ISS : TaxTemplate
     {
-        public double Calculate(Budget budget)
+        public ISS() : base()
         {
-            return budget.Value * 0.06;
+
+        }
+
+        public ISS(TaxTemplate nextTax) : base(nextTax) 
+        {
+
+        } 
+
+        public override double Calculate(Budget budget)
+        {
+            return budget.Value * 0.06 + CalculateNextTax(budget);
         }
     }
 }
